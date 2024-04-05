@@ -1,8 +1,10 @@
 FROM  centos:latest
 MAINTAINER vikashashoke@gmail.com
 ADD https://www.free-css.com/assets/files/free-css-templates/download/page254/photogenic.zip /var/www/html/
-RUN sudo wget 'http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/centos-gpg-keys-8-3.el8.noarch.rpm'
-RUN sudo rpm -i 'centos-gpg-keys-8-3.el8.noarch.rpm'
+RUN cd /etc/yum.repos.d/
+RUN sudo sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+RUN sudo sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+RUN sudo yum update -y
 RUN sudo yum -y install httpd
 WORKDIR /var/www/html/
 RUN unzip photogenic.zip
