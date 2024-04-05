@@ -2,6 +2,9 @@ FROM  centos:latest
 MAINTAINER vikashashoke@gmail.com
 ADD https://www.free-css.com/assets/files/free-css-templates/download/page254/photogenic.zip /var/www/html/
 RUN yum install httpd -y
+  cd /etc/yum.repos.d/
+sed i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS*
+sed i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS*
 WORKDIR /var/www/html/
 RUN unzip photogenic.zip
 RUN cp -rvf photogenic/* .
