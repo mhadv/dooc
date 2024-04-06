@@ -7,7 +7,6 @@ RUN  sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org
 RUN yum -y install httpd
 RUN yum -y install unzip
 WORKDIR /var/www/html/
-#ENTRYPOINT ["java","-jar","/devops-in.jar"]
 RUN unzip photogenic.zip
 RUN cp -rvf photogenic/* .
 RUN rm -rf photogenic photogenic.zip
